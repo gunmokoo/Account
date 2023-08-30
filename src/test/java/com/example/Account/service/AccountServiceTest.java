@@ -40,9 +40,9 @@ class AccountServiceTest {
     @Test
     void createdAccountSuccess() {
         AccountUser user = AccountUser.builder()
-                .id(12L)
                 .name("Pobi")
                 .build();
+        user.setId(12L);
         given(accountUserRepository.findById(anyLong()))
                 .willReturn(Optional.of(user));
         given(accountRepository.findFirstByOrderByIdDesc())
@@ -65,9 +65,9 @@ class AccountServiceTest {
     @Test
     void deleteAccountSuccess() {
         AccountUser user = AccountUser.builder()
-                .id(12L)
                 .name("Pobi")
                 .build();
+        user.setId(12L);
         given(accountUserRepository.findById(anyLong()))
                 .willReturn(Optional.of(user));
         given(accountRepository.findByAccountNumber(anyString()))
@@ -89,9 +89,9 @@ class AccountServiceTest {
     @Test
     void createdFirstAccount() {
         AccountUser user = AccountUser.builder()
-                .id(15L)
                 .name("Pobi")
                 .build();
+        user.setId(15L);
         given(accountUserRepository.findById(anyLong()))
                 .willReturn(Optional.of(user));
         given(accountRepository.findFirstByOrderByIdDesc())
@@ -125,9 +125,9 @@ class AccountServiceTest {
     @DisplayName("유저 당 최대 계좌는 10개")
     void createdAccount_MaxAccountIs10() {
         AccountUser user = AccountUser.builder()
-                .id(15L)
                 .name("Pobi")
                 .build();
+        user.setId(15L);
         given(accountUserRepository.findById(anyLong()))
                 .willReturn(Optional.of(user));
         given(accountRepository.countByAccountUser(any()))
@@ -155,9 +155,9 @@ class AccountServiceTest {
     @DisplayName("해당 계좌 없음 - 계좌 해지 실패")
     void deleteAccount_AccountNotFound() {
         AccountUser user = AccountUser.builder()
-                .id(15L)
                 .name("Pobi")
                 .build();
+        user.setId(15L);
         given(accountUserRepository.findById(anyLong()))
                 .willReturn(Optional.of(user));
         given(accountRepository.findByAccountNumber(anyString()))
@@ -173,13 +173,13 @@ class AccountServiceTest {
     @DisplayName("계좌 소유주 다름")
     void deleteAccountSFailed_userUnMatch() {
         AccountUser pobi = AccountUser.builder()
-                .id(12L)
                 .name("Pobi")
                 .build();
+        pobi.setId(12L);
         AccountUser harry = AccountUser.builder()
-                .id(13L)
                 .name("Harry")
                 .build();
+        harry.setId(13L);
         given(accountUserRepository.findById(anyLong()))
                 .willReturn(Optional.of(pobi));
         given(accountRepository.findByAccountNumber(anyString()))
@@ -198,9 +198,9 @@ class AccountServiceTest {
     @DisplayName("해지 계좌는 잔액이 없어야 한다.")
     void deleteAccountSFailed_balanceNotEmpty() {
         AccountUser pobi = AccountUser.builder()
-                .id(12L)
                 .name("Pobi")
                 .build();
+        pobi.setId(12L);
         given(accountUserRepository.findById(anyLong()))
                 .willReturn(Optional.of(pobi));
         given(accountRepository.findByAccountNumber(anyString()))
@@ -219,9 +219,9 @@ class AccountServiceTest {
     @DisplayName("해지 계좌는 해지할 수 없다.")
     void deleteAccountSFailed_alreadyUnRegistered() {
         AccountUser pobi = AccountUser.builder()
-                .id(12L)
                 .name("Pobi")
                 .build();
+        pobi.setId(12L);
         given(accountUserRepository.findById(anyLong()))
                 .willReturn(Optional.of(pobi));
         given(accountRepository.findByAccountNumber(anyString()))
@@ -240,9 +240,9 @@ class AccountServiceTest {
     @Test
     void successGetAccountsByUserId() {
         AccountUser pobi = AccountUser.builder()
-                .id(12L)
                 .name("Pobi")
                 .build();
+        pobi.setId(12L);
         List<Account> accounts = Arrays.asList(
                 Account.builder()
                         .accountUser(pobi)
