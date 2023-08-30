@@ -6,7 +6,7 @@ import lombok.*;
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 
-public class UseBalance {
+public class CancelBalance {
 
     @Getter
     @Setter
@@ -14,9 +14,8 @@ public class UseBalance {
     @AllArgsConstructor
     @Builder
     public  static  class  Request{
-        @NotNull
-        @Min(1)
-        private Long userId;
+        @NotBlank
+        private String transactionId;
 
         @NotBlank
         @Size(min = 10, max = 10)
@@ -24,7 +23,7 @@ public class UseBalance {
 
         @NotNull
         @Min(10)
-        @Max(1000_000_000)
+        @Max(1_000_000_000)
         private Long amount;
     }
 
